@@ -1,7 +1,7 @@
 # this trains the molecular autoencoder
 
 from mol_encode import MolecularAutoencoder
-from os import mkdir
+import os
 import argparse
 import pandas as pd
 import tensorflow as tf
@@ -10,7 +10,7 @@ import tensorflow as tf
 ##### Runtime variables
 input_data_csv = "data/chembl_100k.csv"
 latent_dim = 64
-max_length = 120
+max_length = 128
 num_epochs = 50
 model_save_name = f"ae_onehot_cnn_maxlen{max_length}_latentdim{latent_dim}"
 
@@ -44,7 +44,9 @@ model = autoencoder.build_model()
 history = autoencoder.train(input_data_csv, epochs=num_epochs)
 
 # Save model
-mkdir("saved_models")
+if not os.path.exists("saved_models"):
+    os.makedirs("saved_models")
+
 autoencoder.save_model(f"saved_models/{model_save_name}")
 
 # Sanity check with a single molecule

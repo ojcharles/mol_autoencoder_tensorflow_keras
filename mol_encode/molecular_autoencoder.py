@@ -116,7 +116,7 @@ class MolecularAutoencoder:
             ),
             tf.keras.callbacks.EarlyStopping(
                 monitor='val_loss',
-                patience=3,
+                patience=5,
                 min_delta=1e-4,
                 restore_best_weights=True
             ),
