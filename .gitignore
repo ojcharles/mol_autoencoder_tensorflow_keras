@@ -1,0 +1,5 @@
+data/chembl_2m.csv
+data/chembl_500k.csv
+data/chembl_smiles_raw.csv
+tensorboard_logs
+mol_encode/__pycache__
