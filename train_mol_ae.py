@@ -9,10 +9,12 @@ import tensorflow as tf
 
 ##### Runtime variables
 input_data_csv = "data/chembl_100k.csv"
-latent_dim = 64
+latent_dim = 128
 max_length = 128
+input_embed_dim = 8
+cnn_kernel_size = 3
 num_epochs = 50
-model_save_name = f"ae_onehot_cnn_maxlen{max_length}_latentdim{latent_dim}"
+model_save_name = f"ae_seqofint_500k_cnn_maxlen{max_length}_latentdim{latent_dim}_inputembeddim{input_embed_dim}_cnnkernelsize{cnn_kernel_size}"
 
 
 #### execution
@@ -35,7 +37,7 @@ if gpus:
 
 # Initialize and build model
 autoencoder = MolecularAutoencoder(
-    latent_dim, max_length, log_dir=f"tensorboard_logs/{model_save_name}"
+    latent_dim, max_length, input_embed_dim, cnn_kernel_size, log_dir=f"tensorboard_logs/{model_save_name}"
 )
 autoencoder.build_vocab()  # Use default vocabulary or provide custom
 model = autoencoder.build_model()
